@@ -1,0 +1,29 @@
+{{- with .Values.deployment }}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .name | default "app-deployment" }}
+spec:
+  replicas: {{ .replicas | default 1 }}
+  selector:
+    matchLabels:
+      app: {{ .name | default "app" }}
+  template:
+    metadata:
+      labels:
+        app: {{ .name | default "app" }}
+    spec:
+      containers:
+        - name: {{ $.Values.container.name | default "app-container" }}
+          {{- with .image}}
+          image: {{ .repository | default "nginx" }}:{{ .tag | default "latest" }}
+          {{- end}}
+          {{- with .ports}}
+          ports:
+            - containerPort: {{ .port1 | default 80 }}
+              {{- if .port2 }}
+            - containerPort: {{ .port2 }}
+              {{- end }}
+          {{- end }}
+{{- end }}
