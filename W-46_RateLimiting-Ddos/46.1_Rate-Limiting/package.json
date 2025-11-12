@@ -1,0 +1,17 @@
+{
+  "name": "46.1_rate-limiting",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@types/express": "^5.0.5",
+    "axios": "^1.13.2",
+    "express": "^5.1.0"
+  }
+}
